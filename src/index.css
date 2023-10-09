@@ -5,7 +5,7 @@ body {
 }
 
 main {
-  background-color: black;
+  // background-color: black;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -75,10 +75,10 @@ main {
   background-color: red;
 }
 
-.green {
-  background-color: #2ad111;
-}
-
 .yellow {
   background-color: yellow;
+}
+
+.green {
+  background-color: #2ad111;
 }
