@@ -1,29 +1,38 @@
 import { Component } from "react";
 
-export class ClassTrafficLight extends Component {
-
-  state = {
-    circle1: 'red',
-    circle2: '',
-    circle3: ''
+const validStates = [
+  {
+    top: 'red',
+    middle: 'black',
+    bottom: 'black'  
+  },
+  {
+    top: 'black',
+    middle: 'black',
+    bottom: 'green'  
+  },
+  {
+    top: 'black',
+    middle: 'yellow',
+    bottom: 'black'  
   }
 
-  changeLight = () => {
-    if (this.state.circle1 === 'red') {
+]
+
+export class ClassTrafficLight extends Component {
+  
+  state = {
+    index: 0
+  }
+
+  changeLightColor = () => {
+    if (this.state.index < validStates.length - 1) {
       this.setState(() => {
-        return {circle1: '', circle2: 'yellow', circle3: ''}
+        return {index: this.state.index + 1}
       })
-    }
-    
-    if (this.state.circle2 === 'yellow') {
+    } else {
       this.setState(() => {
-        return {circle1: '', circle2: '', circle3: 'green'}
-      })
-    }
-      
-    if (this.state.circle3 === 'green') {
-      this.setState(() => {
-        return {circle1: 'red', circle2: '', circle3: ''}
+        return {index: 0}
       })
     }
   }
@@ -35,11 +44,11 @@ export class ClassTrafficLight extends Component {
         <h2>Class Traffic Light</h2>
         <div className="traffic-light">
           {/* Background color can be black | yellow | red | green */}
-          <div className={`circle black ${this.state.circle1}`}></div>
-          <div className={`circle black ${this.state.circle2}`}></div>
-          <div className={`circle black ${this.state.circle3}`}></div>
+          <div className={`circle black ${validStates[this.state.index].top}`}></div>
+          <div className={`circle black ${validStates[this.state.index].middle}`}></div>
+          <div className={`circle black ${validStates[this.state.index].bottom}`}></div>
         </div>
-        <button className="next-state-button" onClick={this.changeLight}>Next State</button>
+        <button className="next-state-button" onClick={this.changeLightColor}>Next State</button>
       </div>
     );
   }

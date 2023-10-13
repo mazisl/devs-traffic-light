@@ -1,23 +1,33 @@
 import {useState} from 'react';
 
+const validStates = [
+  {
+    top: 'red',
+    middle: 'black',
+    bottom: 'black'  
+  },
+  {
+    top: 'black',
+    middle: 'black',
+    bottom: 'green'  
+  },
+  {
+    top: 'black',
+    middle: 'yellow',
+    bottom: 'black'  
+  }
+
+]
+
 export const FunctionalTrafficLight = () => {
 
-  const [circleOneColor, setCircleOneColor] = useState('red');
-  const [circleTwoColor, setCircleTwoColor] = useState('');
-  const [circleThreeColor, setCircleThreeColor] = useState('');
+  const [index, setIndex] = useState(0);
 
   const changeLightColor = () => {
-    if (circleOneColor === 'red') {
-      setCircleOneColor('')
-      setCircleTwoColor('yellow')
-    }
-    if (circleTwoColor === 'yellow') {
-      setCircleTwoColor('')
-      setCircleThreeColor('green')
-    }
-    if (circleThreeColor === 'green') {
-      setCircleThreeColor('')
-      setCircleOneColor('red')
+    if (index < validStates.length - 1) {
+      setIndex(index + 1)
+    } else {
+      setIndex(0)
     }
   }
 
@@ -26,9 +36,9 @@ export const FunctionalTrafficLight = () => {
       <h2>Functional Traffic Light</h2>
       <div className="traffic-light">
         {/* Background color can be black | yellow | red | green */}
-        <div className={`circle black ${circleOneColor}`}></div>
-        <div className={`circle black ${circleTwoColor}`}></div>
-        <div className={`circle black ${circleThreeColor}`}></div>
+        <div className={`circle black ${validStates[index].top}`}></div>
+        <div className={`circle black ${validStates[index].middle}`}></div>
+        <div className={`circle black ${validStates[index].bottom}`}></div>
       </div>
       <button className="next-state-button" onClick={changeLightColor}>Next State</button>
     </div>
